@@ -1,1 +1,624 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Para Constanza 💛</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet"/>
+  <style>
+    /* ============================================================
+       🎨 COLORES — cambia aquí para ajustar toda la página
+    ============================================================ */
+    :root {
+      --amarillo:   #FFD166;
+      --coral:      #EF476F;
+      --menta:      #06D6A0;
+      --azul:       #118AB2;
+      --lavanda:    #C77DFF;
+      --blanco:     #FFFDF7;
+      --oscuro:     #1a1a2e;
+      --texto:      #2d2d2d;
+    }
 
+    /* ============================================================
+       BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: var(--blanco);
+      color: var(--texto);
+      overflow-x: hidden;
+    }
+
+    /* ============================================================
+       SECCIÓN 1 — PORTADA (HERO)
+    ============================================================ */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      background: linear-gradient(135deg, #fff9e6 0%, #ffe0ec 50%, #e0f7f0 100%);
+      overflow: hidden;
+    }
+
+    /* confetti de fondo */
+    #hero::before {
+      content: '🌸 💛 ✨ 🌺 💖 🌼 ⭐ 💕 🌷 💫';
+      position: absolute;
+      font-size: 1.4rem;
+      letter-spacing: 2.5rem;
+      line-height: 4rem;
+      top: 0; left: -5%; width: 110%;
+      opacity: 0.18;
+      pointer-events: none;
+      word-break: break-all;
+      white-space: normal;
+    }
+
+    .hero-fecha {
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.3rem;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 1.2rem;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    /* ======================================================
+       ✏️  EDITA AQUÍ — Nombre principal en la portada
+    ====================================================== */
+    .hero-titulo {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      font-weight: 700;
+      line-height: 1.05;
+      background: linear-gradient(135deg, var(--coral), var(--lavanda), var(--azul));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeUp 1s ease 0.2s both;
+    }
+
+    .hero-sub {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      color: #888;
+      margin-top: 0.8rem;
+      animation: fadeUp 1s ease 0.4s both;
+    }
+
+    .hero-scroll {
+      margin-top: 3rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.2rem;
+      text-transform: uppercase;
+      color: #aaa;
+      animation: fadeUp 1s ease 0.8s both, bounce 2s ease 2s infinite;
+    }
+    .hero-scroll span { display: block; font-size: 1.5rem; margin-top: 0.3rem; }
+
+    /* ============================================================
+       SECCIÓN 2 — CARTA
+    ============================================================ */
+    #carta {
+      padding: 6rem 2rem;
+      display: flex;
+      justify-content: center;
+      background: var(--blanco);
+      position: relative;
+    }
+
+    #carta::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--amarillo), var(--coral), var(--lavanda), var(--menta), var(--azul));
+    }
+
+    .carta-paper {
+      background: #fff;
+      max-width: 680px;
+      width: 100%;
+      padding: 3.5rem 3rem;
+      border-radius: 4px;
+      box-shadow:
+        0 2px 4px rgba(0,0,0,0.04),
+        0 8px 30px rgba(0,0,0,0.08),
+        0 0 0 1px rgba(0,0,0,0.04);
+      position: relative;
+    }
+
+    /* línea decorativa izquierda */
+    .carta-paper::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 5px;
+      border-radius: 4px 0 0 4px;
+      background: linear-gradient(180deg, var(--coral), var(--lavanda));
+    }
+
+    .carta-tag {
+      display: inline-block;
+      background: var(--amarillo);
+      color: var(--oscuro);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.25rem;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ======================================================
+       ✏️  EDITA AQUÍ — Título de la carta
+    ====================================================== */
+    .carta-titulo {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--coral);
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    /* ======================================================
+       ✏️  EDITA AQUÍ — Párrafos de la carta
+       Agrega o quita <p> según necesites
+    ====================================================== */
+    .carta-body p {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: #444;
+      margin-bottom: 1.2rem;
+    }
+
+    .carta-body p:first-child::first-letter {
+      font-size: 3.2rem;
+      font-family: 'Dancing Script', cursive;
+      color: var(--coral);
+      float: left;
+      line-height: 0.8;
+      margin-right: 0.1rem;
+      margin-top: 0.3rem;
+    }
+
+    .carta-firma {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.6rem;
+      color: var(--azul);
+      margin-top: 2rem;
+      text-align: right;
+    }
+
+    /* ============================================================
+       SECCIÓN 3 — ÁLBUM DE FOTOS
+    ============================================================ */
+    #album {
+      padding: 6rem 2rem;
+      background: linear-gradient(180deg, #f9f5ff 0%, #fff9f0 100%);
+      position: relative;
+    }
+
+    #album::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--menta), var(--azul), var(--lavanda), var(--amarillo));
+    }
+
+    .album-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    /* ======================================================
+       ✏️  EDITA AQUÍ — Título del álbum
+    ====================================================== */
+    .album-titulo {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      background: linear-gradient(135deg, var(--azul), var(--lavanda));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .album-sub {
+      font-family: 'Lato', sans-serif;
+      color: #aaa;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      letter-spacing: 0.15rem;
+    }
+
+    /* ============================================================
+       GRID DE FOTOS
+       Para agregar fotos: copia un bloque .foto-item y cambia
+       la ruta de la imagen, el título y la fecha
+    ============================================================ */
+    .foto-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .foto-item {
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .foto-item:hover {
+      transform: translateY(-6px) rotate(0.5deg);
+      box-shadow: 0 12px 35px rgba(0,0,0,0.14);
+    }
+
+    /* Cada foto tiene un color de acento diferente */
+    .foto-item:nth-child(4n+1) .foto-accent { background: var(--coral); }
+    .foto-item:nth-child(4n+2) .foto-accent { background: var(--menta); }
+    .foto-item:nth-child(4n+3) .foto-accent { background: var(--amarillo); }
+    .foto-item:nth-child(4n+4) .foto-accent { background: var(--lavanda); }
+
+    .foto-accent {
+      height: 4px;
+    }
+
+    .foto-img-wrap {
+      width: 100%;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .foto-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .foto-item:hover .foto-img-wrap img {
+      transform: scale(1.05);
+    }
+
+    /* placeholder cuando no hay foto aún */
+    .foto-placeholder {
+      font-size: 3rem;
+      opacity: 0.25;
+    }
+
+    .foto-info {
+      padding: 1rem 1.2rem 1.2rem;
+    }
+
+    /* ======================================================
+       ✏️  EDITA AQUÍ — Título y fecha de cada foto
+    ====================================================== */
+    .foto-titulo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--oscuro);
+      margin-bottom: 0.25rem;
+    }
+
+    .foto-fecha {
+      font-size: 0.78rem;
+      color: #bbb;
+      font-family: 'Lato', sans-serif;
+      letter-spacing: 0.1rem;
+    }
+
+    /* ============================================================
+       LIGHTBOX (para ver fotos grandes)
+    ============================================================ */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 2rem;
+    }
+    #lightbox.activo { display: flex; }
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 78vh;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+    #lightbox-caption {
+      color: #fff;
+      margin-top: 1rem;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.4rem;
+    }
+    #lightbox-close {
+      position: absolute;
+      top: 1.5rem; right: 1.5rem;
+      background: none; border: none;
+      color: #fff; font-size: 2rem;
+      cursor: pointer; opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    #lightbox-close:hover { opacity: 1; }
+
+    /* ============================================================
+       SECCIÓN 4 — PIE DE PÁGINA
+    ============================================================ */
+    #footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      background: var(--oscuro);
+      color: #fff;
+    }
+
+    /* ======================================================
+       ✏️  EDITA AQUÍ — Texto del pie de página
+    ====================================================== */
+    .footer-frase {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.6rem;
+      color: var(--amarillo);
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-sub {
+      font-size: 0.78rem;
+      color: #666;
+      letter-spacing: 0.15rem;
+    }
+
+    /* ============================================================
+       ANIMACIONES
+    ============================================================ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 600px) {
+      .carta-paper { padding: 2rem 1.5rem; }
+      .foto-grid   { grid-template-columns: 1fr 1fr; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     SECCIÓN 1 — PORTADA
+     ✏️ Cambia "Constanza" por lo que quieras
+============================================================ -->
+<section id="hero">
+  <p class="hero-fecha">14 de Febrero · San Valentín</p>
+  <h1 class="hero-titulo">Constanza</h1>
+  <p class="hero-sub">Esta página es tuya, para siempre 🌸</p>
+  <p class="hero-scroll">Sigue leyendo <span>↓</span></p>
+</section>
+
+
+<!-- ============================================================
+     SECCIÓN 2 — CARTA DE AMOR
+     ✏️ Edita el título y los párrafos dentro de .carta-body
+     Puedes agregar o quitar <p> libremente
+============================================================ -->
+<section id="carta">
+  <div class="carta-paper">
+    <span class="carta-tag">❤️ Una carta para ti</span>
+
+    <h2 class="carta-titulo">Mi Constanza querida,</h2>
+
+    <div class="carta-body">
+
+      <!-- ✏️ PÁRRAFO 1 — Escribe aquí tu intro -->
+      <p>
+        Escribe aquí lo que sientes. Este es tu espacio, tu carta, tus palabras.
+        Puedes hablar de cómo se conocieron, de ese primer momento, de lo que
+        ella significa para ti.
+      </p>
+
+      <!-- ✏️ PÁRRAFO 2 — Agrega un recuerdo especial -->
+      <p>
+        Recuerda ese día cuando... (escribe un recuerdo especial que compartan).
+        Esos momentos son los que hacen que todo valga la pena.
+      </p>
+
+      <!-- ✏️ PÁRRAFO 3 — Lo que la hace especial -->
+      <p>
+        Lo que más me gusta de ti es... Puedes enumerar cosas, contar una
+        historia, o simplemente escribir desde el corazón. No hay forma
+        incorrecta de decir lo que sientes.
+      </p>
+
+      <!-- ✏️ PÁRRAFO 4 — Cierre / promesa -->
+      <p>
+        Esta página existirá en internet para siempre, igual que lo que siento
+        por ti. Cada foto que vaya apareciendo aquí es un capítulo más de
+        nuestra historia.
+      </p>
+
+    </div>
+
+    <!-- ✏️ Cambia "Tu nombre" por el tuyo -->
+    <p class="carta-firma">Con todo mi amor, Tu nombre 💛</p>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECCIÓN 3 — ÁLBUM DE FOTOS
+     ✏️ Para agregar una foto nueva:
+       1. Sube la imagen a la carpeta /fotos/
+       2. Copia uno de los bloques .foto-item de abajo
+       3. Cambia src, .foto-titulo y .foto-fecha
+============================================================ -->
+<section id="album">
+  <div class="album-header">
+    <h2 class="album-titulo">Nuestros Momentos</h2>
+    <p class="album-sub">Un álbum que crece con nosotros</p>
+  </div>
+
+  <div class="foto-grid">
+
+    <!-- ══════════════════════════════════════════
+         FOTO 1
+         ✏️ Cambia src="fotos/foto1.jpg" por tu imagen
+            Cambia el título y la fecha
+    ══════════════════════════════════════════ -->
+    <div class="foto-item" onclick="abrirFoto(this)">
+      <div class="foto-accent"></div>
+      <div class="foto-img-wrap">
+        <!-- Cuando tengas la foto, cambia esto por: <img src="fotos/foto1.jpg" alt="descripción"> -->
+        <span class="foto-placeholder">📷</span>
+      </div>
+      <div class="foto-info">
+        <p class="foto-titulo">Nuestro primer momento</p>
+        <p class="foto-fecha">Fecha especial</p>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         FOTO 2
+    ══════════════════════════════════════════ -->
+    <div class="foto-item" onclick="abrirFoto(this)">
+      <div class="foto-accent"></div>
+      <div class="foto-img-wrap">
+        <span class="foto-placeholder">📷</span>
+      </div>
+      <div class="foto-info">
+        <p class="foto-titulo">Aquí va el título</p>
+        <p class="foto-fecha">Fecha</p>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         FOTO 3
+    ══════════════════════════════════════════ -->
+    <div class="foto-item" onclick="abrirFoto(this)">
+      <div class="foto-accent"></div>
+      <div class="foto-img-wrap">
+        <span class="foto-placeholder">📷</span>
+      </div>
+      <div class="foto-info">
+        <p class="foto-titulo">Aquí va el título</p>
+        <p class="foto-fecha">Fecha</p>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         FOTO 4
+    ══════════════════════════════════════════ -->
+    <div class="foto-item" onclick="abrirFoto(this)">
+      <div class="foto-accent"></div>
+      <div class="foto-img-wrap">
+        <span class="foto-placeholder">📷</span>
+      </div>
+      <div class="foto-info">
+        <p class="foto-titulo">Aquí va el título</p>
+        <p class="foto-fecha">Fecha</p>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         ➕ COPIA ESTE BLOQUE PARA AGREGAR MÁS FOTOS
+    ══════════════════════════════════════════ -->
+    <!--
+    <div class="foto-item" onclick="abrirFoto(this)">
+      <div class="foto-accent"></div>
+      <div class="foto-img-wrap">
+        <img src="fotos/tuFoto.jpg" alt="descripción">
+      </div>
+      <div class="foto-info">
+        <p class="foto-titulo">Título de la foto</p>
+        <p class="foto-fecha">Fecha</p>
+      </div>
+    </div>
+    -->
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     PIE DE PÁGINA
+     ✏️ Cambia la frase y los nombres
+============================================================ -->
+<footer id="footer">
+  <p class="footer-frase">Hecha con amor, para ti 💛</p>
+  <!-- ✏️ Cambia los nombres -->
+  <p class="footer-sub">Tu nombre & Constanza · 14·02·2025</p>
+</footer>
+
+
+<!-- ============================================================
+     LIGHTBOX — no toques esto, funciona solo
+============================================================ -->
+<div id="lightbox">
+  <button id="lightbox-close" onclick="cerrarFoto()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+  <p id="lightbox-caption"></p>
+</div>
+
+
+<!-- ============================================================
+     JAVASCRIPT — solo el lightbox, no necesitas tocar esto
+============================================================ -->
+<script>
+  function abrirFoto(item) {
+    const img = item.querySelector('img');
+    if (!img) return; // no hace nada si es placeholder
+    const titulo = item.querySelector('.foto-titulo').textContent;
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox-caption').textContent = titulo;
+    document.getElementById('lightbox').classList.add('activo');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function cerrarFoto() {
+    document.getElementById('lightbox').classList.remove('activo');
+    document.body.style.overflow = '';
+  }
+
+  // cerrar con tecla Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') cerrarFoto();
+  });
+</script>
+
+</body>
+</html>
