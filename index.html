@@ -24,14 +24,147 @@
        BASE
     ============================================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
-
     body {
       font-family: 'Lato', sans-serif;
       background: var(--blanco);
       color: var(--texto);
       overflow-x: hidden;
+    }
+
+    /* ============================================================
+       PANTALLA DE CONTRASEÑA
+    ============================================================ */
+    #pantalla-lock {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: linear-gradient(135deg, #fff9e6 0%, #ffe0ec 50%, #e0f7f0 100%);
+      padding: 2rem;
+      text-align: center;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    #pantalla-lock.saliendo {
+      opacity: 0;
+      transform: scale(1.04);
+      pointer-events: none;
+    }
+
+    /* emojis flotantes de fondo */
+    #pantalla-lock::before {
+      content: '🌸 💛 ✨ 🌺 💖 🌼 ⭐ 💕 🌷 💫';
+      position: absolute;
+      font-size: 1.4rem;
+      letter-spacing: 2.5rem;
+      line-height: 4rem;
+      top: 0; left: -5%; width: 110%;
+      opacity: 0.15;
+      pointer-events: none;
+      word-break: break-all;
+      white-space: normal;
+    }
+
+    .lock-emoji {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .lock-titulo {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2rem, 7vw, 3.5rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--coral), var(--lavanda));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .lock-sub {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: #999;
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .lock-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .lock-input {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      border: 2px solid #f0d0da;
+      border-radius: 50px;
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      text-align: center;
+      outline: none;
+      background: #fff;
+      color: var(--texto);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      letter-spacing: 0.05rem;
+    }
+
+    .lock-input:focus {
+      border-color: var(--coral);
+      box-shadow: 0 0 0 4px rgba(239,71,111,0.1);
+    }
+
+    .lock-input.error {
+      border-color: var(--coral);
+      animation: shake 0.4s ease;
+    }
+
+    .lock-btn {
+      width: 100%;
+      padding: 0.9rem;
+      background: linear-gradient(135deg, var(--coral), var(--lavanda));
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.1rem;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .lock-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    .lock-btn:active {
+      transform: translateY(0);
+    }
+
+    .lock-error {
+      font-size: 0.85rem;
+      color: var(--coral);
+      font-family: 'Lato', sans-serif;
+      min-height: 1.2rem;
+      transition: opacity 0.2s;
+    }
+
+    /* ============================================================
+       CONTENIDO PRINCIPAL (oculto hasta ingresar contraseña)
+    ============================================================ */
+    #contenido {
+      display: none;
     }
 
     /* ============================================================
@@ -50,7 +183,6 @@
       overflow: hidden;
     }
 
-    /* confetti de fondo */
     #hero::before {
       content: '🌸 💛 ✨ 🌺 💖 🌼 ⭐ 💕 🌷 💫';
       position: absolute;
@@ -75,9 +207,6 @@
       animation: fadeUp 0.8s ease both;
     }
 
-    /* ======================================================
-       ✏️  EDITA AQUÍ — Nombre principal en la portada
-    ====================================================== */
     .hero-titulo {
       font-family: 'Dancing Script', cursive;
       font-size: clamp(3.5rem, 10vw, 7rem);
@@ -141,7 +270,6 @@
       position: relative;
     }
 
-    /* línea decorativa izquierda */
     .carta-paper::before {
       content: '';
       position: absolute;
@@ -164,9 +292,6 @@
       margin-bottom: 1.5rem;
     }
 
-    /* ======================================================
-       ✏️  EDITA AQUÍ — Título de la carta
-    ====================================================== */
     .carta-titulo {
       font-family: 'Dancing Script', cursive;
       font-size: clamp(2rem, 5vw, 3rem);
@@ -175,10 +300,6 @@
       line-height: 1.2;
     }
 
-    /* ======================================================
-       ✏️  EDITA AQUÍ — Párrafos de la carta
-       Agrega o quita <p> según necesites
-    ====================================================== */
     .carta-body p {
       font-family: 'Playfair Display', serif;
       font-size: 1.05rem;
@@ -227,9 +348,6 @@
       margin-bottom: 3rem;
     }
 
-    /* ======================================================
-       ✏️  EDITA AQUÍ — Título del álbum
-    ====================================================== */
     .album-titulo {
       font-family: 'Dancing Script', cursive;
       font-size: clamp(2.5rem, 6vw, 4rem);
@@ -247,11 +365,6 @@
       letter-spacing: 0.15rem;
     }
 
-    /* ============================================================
-       GRID DE FOTOS
-       Para agregar fotos: copia un bloque .foto-item y cambia
-       la ruta de la imagen, el título y la fecha
-    ============================================================ */
     .foto-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -274,15 +387,12 @@
       box-shadow: 0 12px 35px rgba(0,0,0,0.14);
     }
 
-    /* Cada foto tiene un color de acento diferente */
     .foto-item:nth-child(4n+1) .foto-accent { background: var(--coral); }
     .foto-item:nth-child(4n+2) .foto-accent { background: var(--menta); }
     .foto-item:nth-child(4n+3) .foto-accent { background: var(--amarillo); }
     .foto-item:nth-child(4n+4) .foto-accent { background: var(--lavanda); }
 
-    .foto-accent {
-      height: 4px;
-    }
+    .foto-accent { height: 4px; }
 
     .foto-img-wrap {
       width: 100%;
@@ -301,23 +411,12 @@
       transition: transform 0.4s ease;
     }
 
-    .foto-item:hover .foto-img-wrap img {
-      transform: scale(1.05);
-    }
+    .foto-item:hover .foto-img-wrap img { transform: scale(1.05); }
 
-    /* placeholder cuando no hay foto aún */
-    .foto-placeholder {
-      font-size: 3rem;
-      opacity: 0.25;
-    }
+    .foto-placeholder { font-size: 3rem; opacity: 0.25; }
 
-    .foto-info {
-      padding: 1rem 1.2rem 1.2rem;
-    }
+    .foto-info { padding: 1rem 1.2rem 1.2rem; }
 
-    /* ======================================================
-       ✏️  EDITA AQUÍ — Título y fecha de cada foto
-    ====================================================== */
     .foto-titulo {
       font-family: 'Playfair Display', serif;
       font-size: 1rem;
@@ -334,7 +433,7 @@
     }
 
     /* ============================================================
-       LIGHTBOX (para ver fotos grandes)
+       LIGHTBOX
     ============================================================ */
     #lightbox {
       display: none;
@@ -371,7 +470,7 @@
     #lightbox-close:hover { opacity: 1; }
 
     /* ============================================================
-       SECCIÓN 4 — PIE DE PÁGINA
+       PIE DE PÁGINA
     ============================================================ */
     #footer {
       text-align: center;
@@ -380,9 +479,6 @@
       color: #fff;
     }
 
-    /* ======================================================
-       ✏️  EDITA AQUÍ — Texto del pie de página
-    ====================================================== */
     .footer-frase {
       font-family: 'Dancing Script', cursive;
       font-size: 1.6rem;
@@ -409,6 +505,19 @@
       50%       { transform: translateY(-8px); }
     }
 
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%       { transform: translateX(-8px); }
+      40%       { transform: translateX(8px); }
+      60%       { transform: translateX(-5px); }
+      80%       { transform: translateX(5px); }
+    }
+
     /* ============================================================
        RESPONSIVE
     ============================================================ */
@@ -421,186 +530,161 @@
 <body>
 
 <!-- ============================================================
-     SECCIÓN 1 — PORTADA
-     ✏️ Cambia "Constanza" por lo que quieras
+     PANTALLA DE CONTRASEÑA
+     ✏️ Para cambiar la contraseña, busca "LaQueNoSeBaña"
+        en el <script> al final y cámbiala
 ============================================================ -->
-<section id="hero">
-  <h1 class="hero-titulo">Constanza</h1>
-  <p class="hero-sub">Esta página es tuya mocosa, para siempre 🌸</p>
-  <p class="hero-scroll">Sigue leyendo jijij <span>↓</span></p>
-</section>
-
-
-<!-- ============================================================
-     SECCIÓN 2 — CARTA DE AMOR
-     ✏️ Edita el título y los párrafos dentro de .carta-body
-     Puedes agregar o quitar <p> libremente
-============================================================ -->
-<section id="carta">
-  <div class="carta-paper">
-    <span class="carta-tag">❤️ Una carta para ti</span>
-
-    <h2 class="carta-titulo">Constanza,</h2>
-
-    <div class="carta-body">
-
-      <!-- ✏️ PÁRRAFO 1 — Escribe aquí tu intro -->
-      <p>
-        La verdad es que, como siempre, no se muy bien por donde empezar.
-        La primera vez que nos conocimos me encantó tu forma de ser,
-        tan libre, tan autentica, tan tú. 
-      </p>
-
-      <!-- ✏️ PÁRRAFO 2 — Agrega un recuerdo especial -->
-      <p>
-        Quizá no soy el mejor con palabras, pero si le muevo a otras cosas jeje, por eso
-        y de ahora en adelante, he configurado esta página con este dominio para ti, por lo que ahora será tuya para siempre. Aquí podremos ir subiendo nuestras historias y aventuras,
-        y podras acceder a tu página las veces que quieras, cuando quieras y desde donde quieras. 
-      </p>
-
-      <!-- ✏️ PÁRRAFO 3 — Lo que la hace especial -->
-      <p>
-        La verdad es que pensé en hacerte algo manual, pero la verdad no es algo que se me de muy bien y quería darte algo
-        que no solo saliera de mi corazón, sino que fuera algo muy mio, solo para ti.
-      </p>
-
-      <!-- ✏️ PÁRRAFO 4 — Cierre / promesa -->
-      <p>
-        Esta página existirá en internet para siempre.
-        Cada foto que vaya apareciendo aquí es un capítulo más de
-        nuestra historia. Te amo mucho guapa, espero te guste.
-      </p>
-
-    </div>
-
-
-    <p class="carta-firma">Con todo mi cariño, Sergio 💛</p>
+<div id="pantalla-lock">
+  <div class="lock-emoji">🔐</div>
+  <h1 class="lock-titulo">¿Eres tú, Constanza?</h1>
+  <p class="lock-sub">Esta página es solo para ti 🌸</p>
+  <div class="lock-form">
+    <input
+      type="password"
+      id="lock-input"
+      class="lock-input"
+      placeholder="Escribe la contraseña..."
+      autocomplete="off"
+    />
+    <p class="lock-error" id="lock-error"></p>
+    <button class="lock-btn" onclick="verificarPassword()">Entrar 💛</button>
   </div>
-</section>
+</div>
 
 
 <!-- ============================================================
-     SECCIÓN 3 — ÁLBUM DE FOTOS
-     ✏️ Para agregar una foto nueva:
-       1. Sube la imagen a la carpeta /fotos/
-       2. Copia uno de los bloques .foto-item de abajo
-       3. Cambia src, .foto-titulo y .foto-fecha
+     CONTENIDO PRINCIPAL
+     (todo lo de abajo se muestra solo si la contraseña es correcta)
 ============================================================ -->
-<section id="album">
-  <div class="album-header">
-    <h2 class="album-titulo">Nuestros Momentos</h2>
-    <p class="album-sub">Un álbum que crece con nosotros</p>
-  </div>
+<div id="contenido">
 
-  <div class="foto-grid">
+  <!-- SECCIÓN 1 — PORTADA -->
+  <section id="hero">
+    <h1 class="hero-titulo">Constanza</h1>
+    <p class="hero-sub">Esta página es tuya mocosa, para siempre 🌸</p>
+    <p class="hero-scroll">Sigue leyendo jijij <span>↓</span></p>
+  </section>
 
-    <!-- ══════════════════════════════════════════
-         FOTO 1
-         ✏️ Cambia src="fotos/foto1.jpg" por tu imagen
-            Cambia el título y la fecha
-    ══════════════════════════════════════════ -->
-    <div class="foto-item" onclick="abrirFoto(this)">
-      <div class="foto-accent"></div>
-      <div class="foto-img-wrap">
-        <!-- Cuando tengas la foto, cambia esto por: <img src="fotos/foto1.jpg" alt="descripción"> -->
-        <img src="fotos/torrelatino.jpeg" alt="descripción">
+  <!-- SECCIÓN 2 — CARTA -->
+  <section id="carta">
+    <div class="carta-paper">
+      <span class="carta-tag">❤️ Una carta para ti</span>
+      <h2 class="carta-titulo">Constanza,</h2>
+      <div class="carta-body">
+        <p>
+          La verdad es que, como siempre, no se muy bien por donde empezar.
+          La primera vez que nos conocimos me encantó tu forma de ser,
+          tan libre, tan autentica, tan tú.
+        </p>
+        <p>
+          Quizá no soy el mejor con palabras, pero si le muevo a otras cosas jeje, por eso
+          y de ahora en adelante, he configurado esta página con este dominio para ti, por lo que ahora será tuya para siempre. Aquí podremos ir subiendo nuestras historias y aventuras,
+          y podras acceder a tu página las veces que quieras, cuando quieras y desde donde quieras.
+        </p>
+        <p>
+          La verdad es que pensé en hacerte algo manual, pero la verdad no es algo que se me de muy bien y quería darte algo
+          que no solo saliera de mi corazón, sino que fuera algo muy mio, solo para ti.
+        </p>
+        <p>
+          Esta página existirá en internet para siempre.
+          Cada foto que vaya apareciendo aquí es un capítulo más de
+          nuestra historia. Te amo mucho guapa, espero te guste.
+        </p>
       </div>
-      <div class="foto-info">
-        <p class="foto-titulo">Nosotros en la Torre Latino jeje</p>
-        <p class="foto-fecha">Fecha especial</p>
-      </div>
+      <p class="carta-firma">Con todo mi cariño, Sergio 💛</p>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 3 — ÁLBUM DE FOTOS -->
+  <section id="album">
+    <div class="album-header">
+      <h2 class="album-titulo">Nuestros Momentos</h2>
+      <p class="album-sub">Un álbum que crece con nosotros</p>
     </div>
 
-    <!-- ══════════════════════════════════════════
-         FOTO 2
-    ══════════════════════════════════════════ -->
-    <div class="foto-item" onclick="abrirFoto(this)">
-      <div class="foto-accent"></div>
-      <div class="foto-img-wrap">
-        <img src="fotos/GuanaYork.jpeg" alt="descripción">
+    <div class="foto-grid">
+
+      <div class="foto-item" onclick="abrirFoto(this)">
+        <div class="foto-accent"></div>
+        <div class="foto-img-wrap">
+          <img src="fotos/torrelatino.jpeg" alt="Torre Latino">
+        </div>
+        <div class="foto-info">
+          <p class="foto-titulo">Nosotros en la Torre Latino jeje</p>
+          <p class="foto-fecha">Fecha especial</p>
+        </div>
       </div>
-      <div class="foto-info">
-        <p class="foto-titulo">La primera vez que fui a GuanaYork con tu familia</p>
-        <p class="foto-fecha">Fecha</p>
+
+      <div class="foto-item" onclick="abrirFoto(this)">
+        <div class="foto-accent"></div>
+        <div class="foto-img-wrap">
+          <img src="fotos/GuanaYork.jpeg" alt="GuanaYork">
+        </div>
+        <div class="foto-info">
+          <p class="foto-titulo">La primera vez que fui a GuanaYork con tu familia</p>
+          <p class="foto-fecha">Fecha</p>
+        </div>
       </div>
+
+      <div class="foto-item" onclick="abrirFoto(this)">
+        <div class="foto-accent"></div>
+        <div class="foto-img-wrap">
+          <span class="foto-placeholder">📷</span>
+        </div>
+        <div class="foto-info">
+          <p class="foto-titulo">Nosotros en el concierto de Sabino, GOAT concierto</p>
+          <p class="foto-fecha">Fecha</p>
+        </div>
+      </div>
+
+      <div class="foto-item" onclick="abrirFoto(this)">
+        <div class="foto-accent"></div>
+        <div class="foto-img-wrap">
+          <img src="fotos/Anahuac.jpeg" alt="Anahuac">
+        </div>
+        <div class="foto-info">
+          <p class="foto-titulo">Una de nosotros cuando celebramos tus logros</p>
+          <p class="foto-fecha">Fecha</p>
+        </div>
+      </div>
+
+      <div class="foto-item" onclick="abrirFoto(this)">
+        <div class="foto-accent"></div>
+        <div class="foto-img-wrap">
+          <img src="fotos/Pixel.jpeg" alt="Pixel">
+        </div>
+        <div class="foto-info">
+          <p class="foto-titulo">Yo despues de ganarte en todo lo que te podía ganar</p>
+          <p class="foto-fecha">Fecha</p>
+        </div>
+      </div>
+
+      <!-- ➕ COPIA ESTE BLOQUE PARA AGREGAR MÁS FOTOS
+      <div class="foto-item" onclick="abrirFoto(this)">
+        <div class="foto-accent"></div>
+        <div class="foto-img-wrap">
+          <img src="fotos/tuFoto.jpg" alt="descripción">
+        </div>
+        <div class="foto-info">
+          <p class="foto-titulo">Título de la foto</p>
+          <p class="foto-fecha">Fecha</p>
+        </div>
+      </div>
+      -->
+
     </div>
+  </section>
 
-    <!-- ══════════════════════════════════════════
-         FOTO 3
-    ══════════════════════════════════════════ -->
-    <div class="foto-item" onclick="abrirFoto(this)">
-      <div class="foto-accent"></div>
-      <div class="foto-img-wrap">
-        <span class="foto-placeholder">📷</span>
-      </div>
-      <div class="foto-info">
-        <p class="foto-titulo">Nosotros en el concierto de Sabino, GOAT concierto</p>
-        <p class="foto-fecha">Fecha</p>
-      </div>
-    </div>
+  <!-- PIE DE PÁGINA -->
+  <footer id="footer">
+    <p class="footer-frase">Hecha con amor, para ti 💛</p>
+    <p class="footer-sub">Sergio & Constanza</p>
+  </footer>
 
-    <!-- ══════════════════════════════════════════
-         FOTO 4
-    ══════════════════════════════════════════ -->
-    <div class="foto-item" onclick="abrirFoto(this)">
-      <div class="foto-accent"></div>
-      <div class="foto-img-wrap">
-        <img src="fotos/Anahuac.jpeg" alt="descripción">
-      </div>
-      <div class="foto-info">
-        <p class="foto-titulo">Una de nosotros cuando celebramos tus logros</p>
-        <p class="foto-fecha">Fecha</p>
-      </div>
-    </div>
-
-        <!-- ══════════════════════════════════════════
-         FOTO 
-    ══════════════════════════════════════════ -->
-    <div class="foto-item" onclick="abrirFoto(this)">
-      <div class="foto-accent"></div>
-      <div class="foto-img-wrap">
-        <img src="fotos/Pixel.jpeg" alt="descripción">
-      </div>
-      <div class="foto-info">
-        <p class="foto-titulo">Yo despues de ganarte en todo lo que te podía ganar</p>
-        <p class="foto-fecha">Fecha</p>
-      </div>
-    </div>
-
-    <!-- ══════════════════════════════════════════
-         ➕ COPIA ESTE BLOQUE PARA AGREGAR MÁS FOTOS
-    ══════════════════════════════════════════ -->
-    <!--
-    <div class="foto-item" onclick="abrirFoto(this)">
-      <div class="foto-accent"></div>
-      <div class="foto-img-wrap">
-        <img src="fotos/tuFoto.jpg" alt="descripción">
-      </div>
-      <div class="foto-info">
-        <p class="foto-titulo">Título de la foto</p>
-        <p class="foto-fecha">Fecha</p>
-      </div>
-    </div>
-    -->
-
-  </div>
-</section>
+</div><!-- fin #contenido -->
 
 
-<!-- ============================================================
-     PIE DE PÁGINA
-     ✏️ Cambia la frase y los nombres
-============================================================ -->
-<footer id="footer">
-  <p class="footer-frase">Hecha con amor, para ti 💛</p>
-  <!-- ✏️ Cambia los nombres -->
-  <p class="footer-sub">Sergio & Constanza</p>
-</footer>
-
-
-<!-- ============================================================
-     LIGHTBOX — no toques esto, funciona solo
-============================================================ -->
+<!-- LIGHTBOX -->
 <div id="lightbox">
   <button id="lightbox-close" onclick="cerrarFoto()">✕</button>
   <img id="lightbox-img" src="" alt="">
@@ -608,13 +692,54 @@
 </div>
 
 
-<!-- ============================================================
-     JAVASCRIPT — solo el lightbox, no necesitas tocar esto
-============================================================ -->
 <script>
+  // ============================================================
+  // ✏️ CONTRASEÑA — cámbiala aquí si quieres
+  // ============================================================
+  const PASSWORD_CORRECTA = "LaQueNoSeBaña";
+
+  // Al cargar, revisar si ya ingresó antes (para no pedirla cada vez)
+  window.addEventListener('load', () => {
+    if (sessionStorage.getItem('acceso') === 'ok') {
+      document.getElementById('pantalla-lock').style.display = 'none';
+      document.getElementById('contenido').style.display = 'block';
+    }
+    // permitir Enter en el input
+    document.getElementById('lock-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') verificarPassword();
+    });
+  });
+
+  function verificarPassword() {
+    const input = document.getElementById('lock-input');
+    const error = document.getElementById('lock-error');
+    const valor = input.value;
+
+    if (valor === PASSWORD_CORRECTA) {
+      sessionStorage.setItem('acceso', 'ok');
+      const lock = document.getElementById('pantalla-lock');
+      lock.classList.add('saliendo');
+      setTimeout(() => {
+        lock.style.display = 'none';
+        document.getElementById('contenido').style.display = 'block';
+      }, 600);
+    } else {
+      error.textContent = '❌  Si eres Constanza: Esa no es bb, inténtalo de nuevo chiquita | Si no eres Constanza: *RUGIDO RUGIDO GRUÑIDO* Sal de aquí *RAUWRRRR*  ';
+      input.classList.add('error');
+      input.value = '';
+      setTimeout(() => {
+        input.classList.remove('error');
+        error.textContent = '';
+      }, 2000);
+    }
+  }
+
+  // ============================================================
+  // LIGHTBOX
+  // ============================================================
   function abrirFoto(item) {
     const img = item.querySelector('img');
-    if (!img) return; // no hace nada si es placeholder
+    if (!img) return;
     const titulo = item.querySelector('.foto-titulo').textContent;
     document.getElementById('lightbox-img').src = img.src;
     document.getElementById('lightbox-caption').textContent = titulo;
@@ -627,7 +752,6 @@
     document.body.style.overflow = '';
   }
 
-  // cerrar con tecla Escape
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') cerrarFoto();
   });
